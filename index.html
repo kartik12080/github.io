@@ -1,0 +1,312 @@
+<!--
+Name: Harshil Rao & Kartik Pandit
+Group: 13
+Date Created: 2025-01-15
+Date Modified: 2025-01-25
+Description: This is Assignment-1
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Connect</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Roboto', 'Poppins', 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9ff; /* Removed gradient, solid color instead */
+            color: #007bff; /* You can adjust this to match the chosen scheme */
+        }
+
+        /* Navbar styling */
+        nav.navbar {
+            background-color: rgba(255, 193, 7, 0.62); /* Solid green color */
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: rgba(43, 136, 198, 0.78) !important;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link:hover {
+            color: rgba(8, 0, 255, 0.7) !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            transition: 0.3s ease-in-out;
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            background-color: #e8f5e9; /* Replaced gradient with a solid background color */
+            color: blue;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            color: #ffc107;
+        }
+
+        .hero-section p {
+            font-size: 1.4rem;
+            margin: 15px 0 30px;
+            font-family: 'Roboto', sans-serif;
+            color: rgba(43, 136, 198, 0.78);
+        }
+
+        .hero-section .btn {
+            background-color: #ffc107; /* Solid yellow color */
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section .btn:hover {
+            background-color: #ffca28; /* Slightly lighter yellow */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Carousel styling */
+        .carousel img {
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(128, 203, 196, 0.3); /* Soft teal shadow */
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #007bff; /* Solid blue color */
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        footer a {
+            color: #ffc107;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ffca28;
+            text-decoration: underline;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Dropdown styling */
+        .dropdown-menu {
+            background-color: #007bff; /* Solid blue color */
+            border-radius: 10px;
+        }
+
+        .dropdown-item {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 193, 7, 0.62);
+            color: #ffc107 !important;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Add hover effects for links and buttons */
+        .btn {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            z-index: 1;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+
+        /* Adjustments to layout */
+        .hero-section, footer {
+            padding: 80px 40px;
+        }
+
+        .carousel {
+            margin: 40px auto;
+            max-width: 90%;
+        }
+
+        .carousel img {
+            margin: 0 auto;
+        }
+
+        /* Buttons alignment */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item" id="loginLogoutLink">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1>Join the Movement for a Brighter Tomorrow</h1>
+    <p>Be the change you want to see—volunteer and create a positive impact in your community</p>
+    <a href="./opportunities.html" class="btn">Get Involved</a>
+</div>
+
+<!-- Carousel Section -->
+<div id="volunteerCarousel" class="carousel slide mt-4 container" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="images/01.jpg" class="d-block w-100" alt="Activity 1">
+        </div>
+        <div class="carousel-item">
+            <img src="images/02.jpg" class="d-block w-100" alt="Activity 2">
+        </div>
+        <div class="carousel-item">
+            <img src="images/03.jpg" class="d-block w-100" alt="Activity 3">
+        </div>
+        <div class="carousel-item">
+            <img src="images/04.jpg" class="d-block w-100" alt="Activity 4">
+        </div>
+        <div class="carousel-item">
+            <img src="images/05.jpg" class="d-block w-100" alt="Activity 5">
+        </div>
+        <div class="carousel-item">
+            <img src="images/06.jpg" class="d-block w-100" alt="Activity 6">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; Designed by Harshil Rao & Kartik Pandit</p>
+    <p>
+        <a href="./privacy.html">Privacy Policy</a> |
+        <a href="./terms.html">User Policy</a>
+    </p>
+</footer>
+
+<script>
+    // Function to update the navbar based on login status
+    function updateNavbar() {
+        const loggedInUser = sessionStorage.getItem('loggedInUser');
+        const loginLogoutLink = document.getElementById('loginLogoutLink');
+
+        if (loggedInUser) {
+            // Display the username and logout option
+            loginLogoutLink.innerHTML = `
+                <a class="nav-link" href="#" id="logoutLink">Welcome, ${loggedInUser} | Logout</a>
+            `;
+
+            // Add logout functionality
+            document.getElementById('logoutLink').addEventListener('click', function() {
+                sessionStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html';
+            });
+        } else {
+            // Display the login link
+            loginLogoutLink.innerHTML = `<a class="nav-link" href="login.html">Login</a>`;
+        }
+    }
+
+    // Update the navbar when the page loads
+    updateNavbar();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

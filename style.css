@@ -1,0 +1,106 @@
+/* Events Section Styling */
+#eventsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.event-card {
+    background: linear-gradient(135deg, #6A1B9A, #8E24AA);
+    color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.event-card h5 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #FFC107;
+}
+
+.event-card p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+#categoryFilter {
+    max-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 10px;
+    border: 2px solid #6A1B9A;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+#categoryFilter:focus {
+    border-color: #FFC107;
+    outline: none;
+}
+
+/* Adjust container for a clean layout */
+.container {
+    margin-top: 20px;
+}
+
+/* Heading styling */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    color: #6A1B9A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Footer consistency */
+footer {
+    margin-top: 50px;
+}
+
+/* Map Styling */
+#map {
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+.card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
