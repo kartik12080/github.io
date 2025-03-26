@@ -156,9 +156,12 @@ function renderActivitiesTable(data: StatisticsData) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = '../views/login.html?redirect=statistics.html';
-        return;
+    // Only run this check if we're on the statistics page
+    if (window.location.pathname.includes('/statistics')) {
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = '/views/login.html?redirect=/statistics';
+            return;
+        }
     }
 
     try {
