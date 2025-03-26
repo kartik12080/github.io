@@ -1,11 +1,3 @@
-<!--
-Name: Harshil Rao & Kartik Pandit
-Group: 13
-Date Created: 2025-01-15
-Date Modified: 2025-01-25
-Description: This is Assignment-1
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,194 +5,398 @@ Description: This is Assignment-1
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer Connect</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@600;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #ffc107;
+            --accent: #ff5722;
+            --light-blue: #e3f2fd;
+            --dark-blue: #0d47a1;
+        }
+
         body {
-            font-family: 'Roboto', 'Poppins', 'Open Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
+            color: #333;
             margin: 0;
             padding: 0;
-            background-color: #f0f9ff; /* Removed gradient, solid color instead */
-            color: #007bff; /* You can adjust this to match the chosen scheme */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Navbar styling */
         nav.navbar {
-            background-color: rgba(255, 193, 7, 0.62); /* Solid green color */
+            background-color: rgba(255, 193, 7, 0.9);
             padding: 1rem 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
             font-size: 1.8rem;
-            color: rgba(43, 136, 198, 0.78) !important;
-            font-family: 'Poppins', sans-serif;
+            color: var(--dark-blue) !important;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .nav-link {
             color: white !important;
             font-size: 1rem;
             font-weight: 600;
-            text-transform: uppercase;
             margin: 0 10px;
-            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-link:hover {
-            color: rgba(8, 0, 255, 0.7) !important;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-            transition: 0.3s ease-in-out;
+            color: var(--dark-blue) !important;
+            transform: translateY(-2px);
         }
 
-        .navbar-toggler-icon {
-            background-color: white;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--dark-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         /* Hero section styling */
         .hero-section {
-            background-color: #e8f5e9; /* Replaced gradient with a solid background color */
-            color: blue;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('content/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-section h1 {
             font-size: 3.5rem;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
-            color: #ffc107;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero-section p {
             font-size: 1.4rem;
-            margin: 15px 0 30px;
-            font-family: 'Roboto', sans-serif;
-            color: rgba(43, 136, 198, 0.78);
+            margin: 0 auto 30px;
+            max-width: 700px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
         }
 
-        .hero-section .btn {
-            background-color: #ffc107; /* Solid yellow color */
+        .btn-hero {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-radius: 50px;
             color: white;
             font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+        }
+
+        /* Features section */
+        .features-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-bottom: 30px;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--light-blue), white);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            color: var(--dark-blue);
             font-weight: 600;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-transform: uppercase;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
         }
 
-        .hero-section .btn:hover {
-            background-color: #ffca28; /* Slightly lighter yellow */
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            transition: 0.3s ease-in-out;
+        /* Carousel section */
+        .carousel-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
         }
 
-        /* Carousel styling */
-        .carousel img {
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(128, 203, 196, 0.3); /* Soft teal shadow */
-            transition: transform 0.4s ease-in-out;
+        .carousel-item img {
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .carousel img:hover {
-            transform: scale(1.05);
+        .carousel-item:hover img {
+            transform: scale(1.02);
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+
+        /* Testimonials section */
+        .testimonials-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 4rem;
+            color: rgba(0, 123, 255, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .author-info h5 {
+            margin-bottom: 0;
+            color: var(--dark-blue);
+        }
+
+        .author-info p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Call to action */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--dark-blue));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn-cta {
+            background: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.9);
         }
 
         /* Footer styling */
         footer {
-            background-color: #007bff; /* Solid blue color */
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary));
             color: white;
-            text-align: center;
-            padding: 30px 0;
+            padding: 50px 0 20px;
             font-family: 'Roboto', sans-serif;
+            margin-top: auto;
         }
 
-        footer a {
-            color: #ffc107;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: #ffca28;
-            text-decoration: underline;
-            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Dropdown styling */
-        .dropdown-menu {
-            background-color: #007bff; /* Solid blue color */
-            border-radius: 10px;
-        }
-
-        .dropdown-item {
-            color: white !important;
-            font-weight: 500;
-        }
-
-        .dropdown-item:hover {
-            background-color: rgba(255, 193, 7, 0.62);
-            color: #ffc107 !important;
-            border-radius: 5px;
-            transition: 0.3s ease-in-out;
-        }
-
-        /* Add hover effects for links and buttons */
-        .btn {
-            transition: all 0.3s ease-in-out;
-            position: relative;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            z-index: 1;
-            transition: all 0.4s ease-in-out;
-        }
-
-        .btn:hover::before {
-            width: 100%;
-        }
-
-        .btn:hover {
-            color: white;
-        }
-
-        /* Adjustments to layout */
-        .hero-section, footer {
-            padding: 80px 40px;
-        }
-
-        .carousel {
-            margin: 40px auto;
-            max-width: 90%;
-        }
-
-        .carousel img {
-            margin: 0 auto;
-        }
-
-        /* Buttons alignment */
-        .btn-group {
+        .footer-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .feature-card, .testimonial-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html">Volunteer Connect</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -208,23 +404,30 @@ Description: This is Assignment-1
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                 <li class="nav-item" id="loginLogoutLink">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="views/login.html">Login</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
-                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/about.html">About</a></li>
+                <a href="views/gallery.html" class="nav-link">Gallery</a>
+                <li class="nav-item"><a class="nav-link" href="views/donate.html">Donate</a></li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
-                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                        <li><a class="dropdown-item" href="views/privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="views/terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="views/news.html">News</a></li>
+                        <li><a class="dropdown-item" href="views/statistics.html">Statistics</a></li>
+                        <li><a class="dropdown-item" href="views/eventsPlanning.html">Plan Events</a></li>
                     </ul>
+                </li>
+
+                <li class="nav-item" id="userGreeting" style="display: none;">
+                    <span class="nav-link">Welcome, <span id="usernameDisplay"></span> | <a href="#" onclick="logout()">Logout</a></span>
                 </li>
             </ul>
         </div>
@@ -232,81 +435,219 @@ Description: This is Assignment-1
 </nav>
 
 <!-- Hero Section -->
-<div class="hero-section">
-    <h1>Join the Movement for a Brighter Tomorrow</h1>
-    <p>Be the change you want to see—volunteer and create a positive impact in your community</p>
-    <a href="./opportunities.html" class="btn">Get Involved</a>
-</div>
+<section class="hero-section">
+    <div class="container">
+        <h1>Join the Movement for a Brighter Tomorrow</h1>
+        <p>Be the change you want to see—volunteer and create a positive impact in your community</p>
+        <a href="views/opportunities.html" class="btn btn-hero">Get Involved</a>
+    </div>
+</section>
 
-<!-- Carousel Section -->
-<div id="volunteerCarousel" class="carousel slide mt-4 container" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="images/01.jpg" class="d-block w-100" alt="Activity 1">
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Volunteer With Us?</h2>
         </div>
-        <div class="carousel-item">
-            <img src="images/02.jpg" class="d-block w-100" alt="Activity 2">
-        </div>
-        <div class="carousel-item">
-            <img src="images/03.jpg" class="d-block w-100" alt="Activity 3">
-        </div>
-        <div class="carousel-item">
-            <img src="images/04.jpg" class="d-block w-100" alt="Activity 4">
-        </div>
-        <div class="carousel-item">
-            <img src="images/05.jpg" class="d-block w-100" alt="Activity 5">
-        </div>
-        <div class="carousel-item">
-            <img src="images/06.jpg" class="d-block w-100" alt="Activity 6">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Make a Difference</h3>
+                    <p>Join meaningful projects that create real change in communities and people's lives.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Build Community</h3>
+                    <p>Connect with like-minded individuals who share your passion for helping others.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Gain Experience</h3>
+                    <p>Develop valuable skills and enhance your resume while making a positive impact.</p>
+                </div>
+            </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+</section>
+
+<!-- Carousel Section -->
+<section class="carousel-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Volunteer Activities</h2>
+        </div>
+        <div id="volunteerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="content/images/01.jpg" class="d-block w-100" alt="Community Cleanup">
+                </div>
+                <div class="carousel-item">
+                    <img src="content/images/02.jpg" class="d-block w-100" alt="Food Drive">
+                </div>
+                <div class="carousel-item">
+                    <img src="content/images/03.jpg" class="d-block w-100" alt="Teaching Children">
+                </div>
+                <div class="carousel-item">
+                    <img src="content/images/04.jpg" class="d-block w-100" alt="Planting Trees">
+                </div>
+                <div class="carousel-item">
+                    <img src="content/images/05.jpg" class="d-block w-100" alt="Helping Elderly">
+                </div>
+                <div class="carousel-item">
+                    <img src="content/images/06.jpg" class="d-block w-100" alt="Animal Shelter">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Our Volunteers Say</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Volunteering with this organization has been one of the most rewarding experiences of my life. The team is supportive and the work is meaningful.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson" class="author-img">
+                        <div class="author-info">
+                            <h5>Sarah Johnson</h5>
+                            <p>Volunteer since 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I've met amazing people and learned so much through my volunteer work. The flexibility allows me to contribute even with my busy schedule.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen" class="author-img">
+                        <div class="author-info">
+                            <h5>Michael Chen</h5>
+                            <p>Community Volunteer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The impact we're making together is incredible. Every hour I spend volunteering feels like it's making a real difference in people's lives.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel" class="author-img">
+                        <div class="author-info">
+                            <h5>Priya Patel</h5>
+                            <p>Team Leader</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Make a Difference?</h2>
+        <p>Join our community of volunteers and start creating positive change today.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="views/opportunities.html" class="btn btn-cta">Find Opportunities</a>
+            <a href="views/donate.html" class="btn btn-cta">Support Our Cause</a>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer>
-    <p>&copy; Designed by Harshil Rao & Kartik Pandit</p>
-    <p>
-        <a href="./privacy.html">Privacy Policy</a> |
-        <a href="./terms.html">User Policy</a>
-    </p>
+    <div class="container">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="views/about.html">About Us</a>
+            <a href="views/opportunities.html">Volunteer</a>
+            <a href="views/events.html">Events</a>
+            <a href="views/contact.html">Contact</a>
+            <a href="views/privacy.html">Privacy Policy</a>
+            <a href="views/terms.html">Terms of Service</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Volunteer Connect. Designed by Harshil Rao & Kartik Pandit</p>
+        </div>
+    </div>
 </footer>
 
 <script>
-    // Function to update the navbar based on login status
+    // Update navbar on page load
     function updateNavbar() {
-        const loggedInUser = sessionStorage.getItem('loggedInUser');
+        const loggedInUser = localStorage.getItem('loggedInUser');
         const loginLogoutLink = document.getElementById('loginLogoutLink');
 
         if (loggedInUser) {
-            // Display the username and logout option
             loginLogoutLink.innerHTML = `
                 <a class="nav-link" href="#" id="logoutLink">Welcome, ${loggedInUser} | Logout</a>
             `;
 
-            // Add logout functionality
-            document.getElementById('logoutLink').addEventListener('click', function() {
-                sessionStorage.removeItem('loggedInUser');
-                window.location.href = 'login.html';
+            document.getElementById('logoutLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'views/login.html';
             });
-        } else {
-            // Display the login link
-            loginLogoutLink.innerHTML = `<a class="nav-link" href="login.html">Login</a>`;
         }
     }
 
-    // Update the navbar when the page loads
-    updateNavbar();
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', updateNavbar);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="main.js"></script>
+<script src="dist/main.js" type="module"></script>
+<script src="dist/statistics.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function navigateToEventsPlanning() {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            if (window.router) {
+                window.router.navigate('views/eventsPlanning.html');
+            } else {
+                window.location.href = 'views/events.html';
+            }
+        } else {
+            if (window.router) {
+                window.router.navigate('/login?redirect=/events-planning');
+            } else {
+                window.location.href = '/login?redirect=' + encodeURIComponent('/events-planning');
+            }
+        }
+    }
+</script>
 </body>
 </html>

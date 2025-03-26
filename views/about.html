@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Volunteer Connect</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #ffc107;
+            --accent: #ff5722;
+            --light-blue: #e3f2fd;
+            --dark-blue: #0d47a1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar styling */
+        nav.navbar {
+            background-color: rgba(255, 193, 7, 0.9);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: var(--dark-blue) !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--dark-blue) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--dark-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Main content styling */
+        .main-content {
+            flex: 1;
+            padding: 60px 0;
+        }
+
+        /* About section styling */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-header h1 {
+            font-size: 2.8rem;
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h1::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Mission and values cards */
+        .mission-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .mission-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .mission-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--light-blue), white);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .mission-card h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .mission-card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* About content */
+        .about-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+
+        .about-title {
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Team section */
+        .team-section {
+            margin-top: 60px;
+        }
+
+        .team-title {
+            text-align: center;
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 250px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--light-blue);
+        }
+
+        .member-name {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .member-social a {
+            color: var(--dark-blue);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .member-social a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer styling */
+        footer {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Roboto', sans-serif;
+            margin-top: auto;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mission-cards, .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .mission-card, .team-member {
+                max-width: 100%;
+            }
+
+            .section-header h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                        <li><a class="dropdown-item" href="statistics.html">Statistics</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="about-section">
+        <div class="section-header">
+            <h1>Our Story</h1>
+            <p>Connecting passionate volunteers with meaningful opportunities to create positive change in communities worldwide.</p>
+        </div>
+
+        <div class="mission-cards">
+            <div class="mission-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
+                <p>To empower individuals to make a difference by providing easy access to volunteer opportunities that align with their passions and values.</p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>A world where every person has the opportunity to contribute to meaningful causes and create lasting positive change.</p>
+            </div>
+
+            <div class="mission-card">
+                <i class="fas fa-heart"></i>
+                <h3>Our Values</h3>
+                <p>Community, Integrity, Compassion, and Impact drive everything we do at Volunteer Connect.</p>
+            </div>
+        </div>
+
+        <div class="about-content">
+            <h2 class="about-title">About Volunteer Connect</h2>
+            <p class="about-text">
+                Volunteer Connect is a community-driven platform dedicated to connecting individuals with meaningful volunteer opportunities.
+                Founded in 2023, we provide a simple and efficient way for people to engage in events and initiatives that make a positive
+                impact on their communities.
+            </p>
+            <p class="about-text">
+                Whether you're passionate about environmental conservation, supporting local charities, or raising awareness for important causes,
+                Volunteer Connect helps you find the right opportunities to get involved. Our platform bridges the gap between organizations in need
+                and volunteers looking to make a difference.
+            </p>
+            <p class="about-text">
+                Since our launch, we've facilitated over 10,000 volunteer connections across 50+ cities, supporting causes ranging from food drives
+                and environmental cleanups to mental health awareness campaigns and educational initiatives.
+            </p>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Meet Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Team Member" class="member-photo">
+                    <h4 class="member-name">Sarah Johnson</h4>
+                    <p class="member-role">Founder & CEO</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member" class="member-photo">
+                    <h4 class="member-name">Michael Chen</h4>
+                    <p class="member-role">Technical Director</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Team Member" class="member-photo">
+                    <h4 class="member-name">Priya Patel</h4>
+                    <p class="member-role">Community Manager</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-md-start">
+                <p>&copy; 2023 Volunteer Connect. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p>Designed with <i class="fas fa-heart" style="color: #ff6b6b;"></i> by Harshil Rao & Kartik Pandit</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Add animation to elements when they come into view
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.mission-card, .about-content, .team-member');
+
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+
+            if (elementPosition < screenPosition) {
+                element.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            }
+        });
+    };
+
+    // Run once on load and then on scroll
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+</script>
+</body>
+</html>

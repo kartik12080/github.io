@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Events | Volunteer Connect</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #ffc107;
+            --accent: #ff5722;
+            --dark-blue: #0d47a1;
+            --light-gray: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar styling */
+        nav.navbar {
+            background-color: rgba(255, 193, 7, 0.9);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: var(--dark-blue) !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--dark-blue) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--dark-blue) !important;
+            font-weight: 700;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--dark-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        /* Event Cards */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-image {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .event-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .event-meta i {
+            color: var(--primary);
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .event-category {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, var(--primary), var(--dark-blue));
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ffca28;
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Upcoming Volunteer Opportunities</h1>
+        <p>Find meaningful events to contribute your time and skills to our community</p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="row align-items-center">
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label for="categoryFilter" class="filter-label">Filter by Category</label>
+                <select id="categoryFilter" class="form-select">
+                    <option value="all">All Categories</option>
+                    <option value="Drives">Drives</option>
+                    <option value="Charity">Charity</option>
+                    <option value="Cleanup">Cleanup</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label for="dateFilter" class="filter-label">Filter by Date</label>
+                <select id="dateFilter" class="form-select">
+                    <option value="all">All Dates</option>
+                    <option value="month">This Month</option>
+                    <option value="next-month">Next Month</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label for="locationFilter" class="filter-label">Filter by Location</label>
+                <select id="locationFilter" class="form-select">
+                    <option value="all">All Locations</option>
+                    <option value="Downtown">Downtown</option>
+                    <option value="Whitby">Whitby</option>
+                    <option value="Lakeview">Lakeview</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button id="resetFilters" class="btn btn-outline-secondary w-100" style="margin-top: 24px;">
+                    Reset Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div id="eventsContainer" class="calendar-grid">
+        <div class="event-card" data-category="Drives" data-date="2025-03-15" data-location="Downtown">
+            <img src="https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Food Drive" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Food Bank Drive</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>March 15, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>10:00 AM - 2:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Downtown Community Center</span>
+                </div>
+                <span class="event-category">Drives</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <div class="event-card" data-category="Cleanup" data-date="2025-04-10" data-location="Whitby">
+            <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Beach Cleanup" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Beach Cleanup</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>April 10, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>8:00 AM - 12:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Whitby Beach</span>
+                </div>
+                <span class="event-category">Cleanup</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <div class="event-card" data-category="Charity" data-date="2025-05-01" data-location="Lakeview">
+            <img src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Charity Walkathon" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Charity Walkathon</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>May 1, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>9:00 AM - 1:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Lakeview Park</span>
+                </div>
+                <span class="event-category">Charity</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <div class="event-card" data-category="Cleanup" data-date="2025-06-20" data-location="Downtown">
+            <img src="https://images.unsplash.com/photo-1587135991058-8816a6a7a7b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Recycling Drive" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Recycling Drive</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>June 20, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>10:00 AM - 4:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Lakeridge Hospital</span>
+                </div>
+                <span class="event-category">Cleanup</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <div class="event-card" data-category="Charity" data-date="2025-07-05" data-location="Downtown">
+            <img src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Heritage Restoration" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Heritage Restoration Project</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>July 5, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>8:00 AM - 3:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Durham Museum</span>
+                </div>
+                <span class="event-category">Charity</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <div class="event-card" data-category="Drives" data-date="2025-08-12" data-location="Lakeview">
+            <img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pet Adoption" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Pet Adoption Fair</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>August 12, 2025</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-clock"></i>
+                    <span>11:00 AM - 5:00 PM</span>
+                </div>
+                <div class="event-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Grandview Park</span>
+                </div>
+                <span class="event-category">Drives</span>
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Volunteer Connect. Designed by Harshil Rao & Kartik Pandit</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Filter Events
+    function filterEvents() {
+        const category = document.getElementById('categoryFilter').value;
+        const dateFilter = document.getElementById('dateFilter').value;
+        const location = document.getElementById('locationFilter').value;
+        const eventCards = document.querySelectorAll('.event-card');
+
+        eventCards.forEach(card => {
+            const eventCategory = card.getAttribute('data-category');
+            const eventDate = new Date(card.getAttribute('data-date'));
+            const eventLocation = card.getAttribute('data-location');
+            const today = new Date();
+            const nextMonth = new Date();
+            nextMonth.setMonth(today.getMonth() + 1);
+
+            let showCard = true;
+
+            // Category filter
+            if (category !== 'all' && eventCategory !== category) {
+                showCard = false;
+            }
+
+            // Date filter
+            if (dateFilter !== 'all') {
+                if (dateFilter === 'month' &&
+                    (eventDate.getMonth() !== today.getMonth() || eventDate.getFullYear() !== today.getFullYear())) {
+                    showCard = false;
+                }
+                if (dateFilter === 'next-month' &&
+                    (eventDate.getMonth() !== nextMonth.getMonth() || eventDate.getFullYear() !== nextMonth.getFullYear())) {
+                    showCard = false;
+                }
+                if (dateFilter === 'year' && eventDate.getFullYear() !== today.getFullYear()) {
+                    showCard = false;
+                }
+            }
+
+            // Location filter
+            if (location !== 'all' && eventLocation !== location) {
+                showCard = false;
+            }
+
+            card.style.display = showCard ? 'block' : 'none';
+        });
+    }
+
+    // Initialize filters
+    document.getElementById('categoryFilter').addEventListener('change', filterEvents);
+    document.getElementById('dateFilter').addEventListener('change', filterEvents);
+    document.getElementById('locationFilter').addEventListener('change', filterEvents);
+    document.getElementById('resetFilters').addEventListener('click', function() {
+        document.getElementById('categoryFilter').value = 'all';
+        document.getElementById('dateFilter').value = 'all';
+        document.getElementById('locationFilter').value = 'all';
+        filterEvents();
+    });
+
+    // Add click event to all "View Details" buttons
+    document.querySelectorAll('.btn-view').forEach(button => {
+        button.addEventListener('click', function() {
+            const eventTitle = this.closest('.event-card').querySelector('.event-title').textContent;
+            alert(`You clicked on "${eventTitle}". This would normally open a detailed view of the event.`);
+        });
+    });
+</script>
+</body>
+</html>

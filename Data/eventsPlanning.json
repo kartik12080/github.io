@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Community Cleanup Day",
+    "date": "2025-04-15",
+    "time": "09:00",
+    "location": "Central Park",
+    "description": "Join us to clean up Central Park and make it beautiful for everyone! Bring gloves and reusable bags."
+  },
+  {
+    "id": "2",
+    "name": "Food Drive for Homeless",
+    "date": "2025-04-22",
+    "time": "14:00",
+    "location": "City Food Bank",
+    "description": "Collect and distribute food to those in need. Volunteers needed for packing and delivery."
+  },
+  {
+    "id": "3",
+    "name": "Senior Tech Help Workshop",
+    "date": "2025-05-03",
+    "time": "10:30",
+    "location": "Public Library",
+    "description": "Help seniors learn to use smartphones, email, and social media. No tech expertise required!"
+  }
+]

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics | Volunteer Connect</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Enhanced Statistics Page Styles */
+        .statistics-header {
+            background: linear-gradient(135deg, #4e73df, #224abe);
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .statistics-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            background-size: cover;
+        }
+
+        .statistics-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .statistics-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Enhanced Cards */
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            text-align: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4e73df, #36b9cc);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #4e73df, #36b9cc);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2e59d9;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        /* Enhanced Charts */
+        .stat-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card-header {
+            background: linear-gradient(135deg, #4e73df, #224abe);
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card-header i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        .stat-card-body {
+            padding: 2rem;
+        }
+
+        /* Enhanced Bar Chart */
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .bar-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .bar-label {
+            min-width: 80px;
+            font-weight: 500;
+            color: #4a4a4a;
+        }
+
+        .bar {
+            flex-grow: 1;
+            height: 35px;
+            background-color: #f8f9fa;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4e73df, #36b9cc);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 18px;
+            transition: width 1s ease-out;
+        }
+
+        .bar-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 0 2px rgba(0,0,0,0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Pie Chart */
+        .pie-chart {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .pie-segment {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                    #4e73df 0% 35%,
+                    #36b9cc 35% 60%,
+                    #1cc88a 60% 75%,
+                    #f6c23e 75% 85%,
+                    #e74a3b 85% 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pie-center {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4e73df;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .legend-color {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+        }
+
+        /* Enhanced Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #4e73df;
+            border-bottom: 2px solid #e9ecef;
+            padding: 1rem;
+        }
+
+        .data-table td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tr:hover {
+            background-color: #f1f5fd;
+        }
+
+        /* Animation */
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-card {
+            animation: floatIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-card:nth-child(1) { animation-delay: 0.1s; }
+        .animate-card:nth-child(2) { animation-delay: 0.2s; }
+        .animate-card:nth-child(3) { animation-delay: 0.3s; }
+        .animate-card:nth-child(4) { animation-delay: 0.4s; }
+        .animate-card:nth-child(5) { animation-delay: 0.5s; }
+        .animate-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Loading Error */
+        #loadingError {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .statistics-header {
+                padding: 3rem 0;
+            }
+
+            .statistics-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .stat-value {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .statistics-header {
+                padding: 2.5rem 0;
+                border-radius: 0;
+            }
+
+            .statistics-header h1 {
+                font-size: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .stat-icon {
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                font-size: 2rem;
+            }
+
+            .pie-chart {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pie-legend {
+                margin-top: 1.5rem;
+            }
+
+            .stat-card-header {
+                padding: 1.2rem;
+                font-size: 1.1rem;
+            }
+
+            .stat-card-body {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .statistics-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .statistics-header p {
+                font-size: 1.1rem;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="loadingError" class="alert alert-danger" style="display: none;"></div>
+
+<!-- Header Section -->
+<div class="statistics-header">
+    <div class="container">
+        <h1><i class="fas fa-chart-line me-2"></i>Volunteer Statistics Dashboard</h1>
+        <p>Visual insights into our community's impact and engagement</p>
+    </div>
+</div>
+
+<div class="container py-4">
+    <!-- Stats Overview Cards -->
+    <div class="row mb-5 g-4">
+        <div class="col-md-3 animate-card">
+            <div class="summary-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-value" id="totalVolunteers">0</div>
+                <div class="stat-label">Total Volunteers</div>
+            </div>
+        </div>
+        <div class="col-md-3 animate-card">
+            <div class="summary-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-value" id="totalEvents">0</div>
+                <div class="stat-label">Total Events</div>
+            </div>
+        </div>
+        <div class="col-md-3 animate-card">
+            <div class="summary-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-value" id="avgHours">0</div>
+                <div class="stat-label">Avg Hours/Volunteer</div>
+            </div>
+        </div>
+        <div class="col-md-3 animate-card">
+            <div class="summary-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-value" id="satisfaction">0%</div>
+                <div class="stat-label">Satisfaction Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row g-4">
+        <div class="col-lg-6 animate-card">
+            <div class="stat-card">
+                <div class="stat-card-header">
+                    <i class="fas fa-chart-line"></i> Monthly Volunteer Participation
+                </div>
+                <div class="stat-card-body">
+                    <div class="data-visualization" id="monthlyBars">
+                        <div class="bar-chart" id="monthlyBarChart">
+                            <!-- Bars will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 animate-card">
+            <div class="stat-card">
+                <div class="stat-card-header">
+                    <i class="fas fa-chart-pie"></i> Event Types Distribution
+                </div>
+                <div class="stat-card-body">
+                    <div class="data-visualization" id="eventTypesList">
+                        <div class="pie-chart">
+                            <div class="pie-segment">
+                                <div class="pie-center" id="pieCenterValue">100%</div>
+                            </div>
+                            <div class="pie-legend" id="pieLegend">
+                                <!-- Legend will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Data Section -->
+    <div class="row mt-4 g-4">
+        <div class="col-lg-6 animate-card">
+            <div class="stat-card">
+                <div class="stat-card-header">
+                    <i class="fas fa-chart-area"></i> Yearly Growth
+                </div>
+                <div class="stat-card-body">
+                    <div class="data-visualization" id="yearlyBars">
+                        <div class="bar-chart" id="yearlyBarChart">
+                            <!-- Bars will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 animate-card">
+            <div class="stat-card">
+                <div class="stat-card-header">
+                    <i class="fas fa-table"></i> Top Volunteer Activities
+                </div>
+                <div class="stat-card-body">
+                    <div class="data-visualization">
+                        <table class="data-table" id="activitiesTable">
+                            <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Participants</th>
+                                <th>Hours</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Table rows will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../dist/statistics.js" type="module"></script>
+
+<script>
+    // Navbar login/logout functionality
+    function updateNavbar() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const loginLogoutLink = document.getElementById('loginLogoutLink');
+        const userGreeting = document.getElementById('userGreeting');
+
+        if (loggedInUser) {
+            if (loginLogoutLink) loginLogoutLink.style.display = 'none';
+            if (userGreeting) {
+                userGreeting.style.display = 'block';
+                document.getElementById('usernameDisplay').textContent = loggedInUser;
+            }
+        } else {
+            if (loginLogoutLink) loginLogoutLink.style.display = 'block';
+            if (userGreeting) userGreeting.style.display = 'none';
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('loggedInUser');
+        updateNavbar();
+        window.location.href = 'login.html';
+    }
+
+    // Initialize navbar on load
+    document.addEventListener('DOMContentLoaded', updateNavbar);
+</script>
+</body>
+</html>

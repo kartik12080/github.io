@@ -1,0 +1,26 @@
+{
+  "monthlyData": {
+    "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "volunteers": [120, 190, 170, 210, 240, 220, 250, 230, 200, 220, 210, 240]
+  },
+  "eventTypes": {
+    "labels": ["Environmental", "Education", "Healthcare", "Community", "Animals"],
+    "data": [35, 25, 20, 15, 5],
+    "colors": ["#4e73df", "#36b9cc", "#1cc88a", "#f6c23e", "#e74a3b"]
+  },
+  "yearlyGrowth": {
+    "labels": ["2020", "2021", "2022", "2023"],
+    "volunteers": [800, 1200, 1800, 2500]
+  },
+  "activities": {
+    "name": ["Beach Cleanup", "Food Drive", "Tutoring", "Tree Planting", "Senior Visits"],
+    "participants": [150, 120, 90, 80, 65],
+    "hours": [450, 360, 270, 240, 195]
+  },
+  "summaryStats": {
+    "totalVolunteers": 2530,
+    "totalEvents": 124,
+    "avgHours": 4.7,
+    "satisfaction": 92
+  }
+}

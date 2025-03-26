@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning | Volunteer Connect</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+            --accent-color: #2e59d9;
+            --text-color: #5a5c69;
+            --light-gray: #f8f9fa;
+            --dark-gray: #d1d3e2;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .navbar {
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            background: white;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .card {
+            border: none;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 0.35rem 0.35rem 0 0 !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* Event cards */
+        .event-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .event-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(78, 115, 223, 0.1);
+            margin-right: 15px;
+            flex-shrink: 0;
+            color: var(--primary-color);
+        }
+
+        .event-detail {
+            flex-grow: 1;
+        }
+
+        .event-date {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 0.35rem;
+            width: 70px;
+        }
+
+        .event-date .day {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .event-actions .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin: 0 2px;
+        }
+
+        .sort-dropdown .dropdown-toggle::after {
+            margin-left: 0.5em;
+        }
+
+        #noEventsMessage {
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 3rem !important;
+        }
+
+        /* Form styling */
+        .form-control, .form-select {
+            border-radius: 0.35rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--dark-gray);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .event-date {
+                width: 60px;
+            }
+
+            .event-date .day {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Animation for form submission */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Badge for event status */
+        .event-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+            <i class="fas fa-hands-helping me-2"></i>Volunteer Connect
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="../index.html"><i class="fas fa-home me-1"></i>Home</a></li>
+                <li class="nav-item" id="loginLogoutLink">
+                    <a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt me-1"></i>Login</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html"><i class="fas fa-hand-holding-heart me-1"></i>Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link active" href="events.html"><i class="fas fa-calendar-alt me-1"></i>Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i>Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i>About</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images me-1"></i>Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="donate.html"><i class="fas fa-donate me-1"></i>Donate</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h me-1"></i>More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html"><i class="fas fa-shield-alt me-1"></i>Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html"><i class="fas fa-file-contract me-1"></i>Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html"><i class="fas fa-newspaper me-1"></i>News</a></li>
+                        <li><a class="dropdown-item" href="statistics.html"><i class="fas fa-chart-bar me-1"></i>Statistics</a></li>
+                        <li><a class="dropdown-item" href="eventsPlanning.html"><i class="fas fa-tasks me-1"></i>Plan Events</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <div class="nav-item" id="userGreeting" style="display: none;">
+                    <span class="nav-link">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="usernameDisplay"></span> |
+                        <a href="#" onclick="logout()">Logout</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary mb-3">
+            <i class="fas fa-calendar-alt me-2"></i>Plan Community Events
+        </h1>
+        <p class="lead text-muted">
+            Create and manage volunteer events for your community. Bring people together for a good cause!
+        </p>
+    </div>
+
+    <!-- Event Creation Form -->
+    <div class="row justify-content-center mb-5 fade-in">
+        <div class="col-lg-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create New Event</h3>
+                </div>
+                <div class="card-body">
+                    <form id="eventForm" novalidate>
+                        <div class="mb-4">
+                            <label for="eventName" class="form-label fw-bold">Event Name *</label>
+                            <input type="text" class="form-control form-control-lg" id="eventName" placeholder="e.g. Community Cleanup Day" required />
+                            <div class="invalid-feedback">Please provide a name (3-50 characters).</div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="eventDate" class="form-label fw-bold">Date *</label>
+                                <input type="date" class="form-control form-control-lg" id="eventDate" min="" required />
+                                <div class="invalid-feedback">Please select a future date.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="eventTime" class="form-label fw-bold">Time *</label>
+                                <input type="time" class="form-control form-control-lg" id="eventTime" required />
+                                <div class="invalid-feedback">Please select a time.</div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="eventLocation" class="form-label fw-bold">Location *</label>
+                            <input type="text" class="form-control form-control-lg" id="eventLocation" placeholder="e.g. Central Park, Main Street" required />
+                            <div class="invalid-feedback">Please provide a location.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="eventDescription" class="form-label fw-bold">Description *</label>
+                            <textarea class="form-control" id="eventDescription" rows="4" placeholder="Describe the event, volunteer roles, and any special requirements..." required></textarea>
+                            <div class="invalid-feedback">Description must be 10-500 characters.</div>
+                            <div class="form-text">Maximum 500 characters</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold">
+                            <i class="fas fa-check me-2"></i>Create Event
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Events List Section -->
+    <div class="row mt-5 fade-in">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 fw-bold">
+                    <i class="fas fa-calendar-check me-2 text-primary"></i>Your Upcoming Events
+                </h2>
+                <div class="d-flex">
+                    <div class="dropdown sort-dropdown me-2">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-sort me-1"></i> Sort By
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="date-asc"><i class="fas fa-sort-amount-up me-2"></i>Date (Oldest First)</a></li>
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="date-desc"><i class="fas fa-sort-amount-down-alt me-2"></i>Date (Newest First)</a></li>
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="name-asc"><i class="fas fa-sort-alpha-up me-2"></i>Name (A-Z)</a></li>
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="name-desc"><i class="fas fa-sort-alpha-down-alt me-2"></i>Name (Z-A)</a></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" id="refreshEvents">
+                        <i class="fas fa-sync-alt me-1"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div id="noEventsMessage" class="text-center py-5 my-5" style="display: none;">
+                <i class="fas fa-calendar-times fa-4x mb-4 text-muted"></i>
+                <h3 class="text-muted fw-bold">No Events Found</h3>
+                <p class="text-muted">You haven't created any events yet. Start by creating one above!</p>
+                <button class="btn btn-primary mt-3" onclick="document.getElementById('eventForm').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fas fa-plus me-1"></i> Create Event
+                </button>
+            </div>
+
+            <div id="eventsList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Events will be dynamically inserted here -->
+            </div>
+
+            <nav aria-label="Event pagination" class="mt-5" id="eventsPagination" style="display: none;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Event Modal -->
+<div class="modal fade" id="editEventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Event</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editEventForm">
+                    <input type="hidden" id="editEventId" />
+                    <div class="mb-3">
+                        <label for="editEventName" class="form-label fw-bold">Event Name *</label>
+                        <input type="text" class="form-control" id="editEventName" required />
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label for="editEventDate" class="form-label fw-bold">Date *</label>
+                            <input type="date" class="form-control" id="editEventDate" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editEventTime" class="form-label fw-bold">Time *</label>
+                            <input type="time" class="form-control" id="editEventTime" required />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEventLocation" class="form-label fw-bold">Location *</label>
+                        <input type="text" class="form-control" id="editEventLocation" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEventDescription" class="form-label fw-bold">Description *</label>
+                        <textarea class="form-control" id="editEventDescription" rows="4" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-danger me-auto" id="deleteEventBtn">
+                    <i class="fas fa-trash me-1"></i> Delete
+                </button>
+                <button type="button" class="btn btn-primary" id="saveEditBtn">
+                    <i class="fas fa-save me-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title"><i class="fas fa-exclamation-triangle me-2"></i>Confirm Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="confirmationMessage">
+                Are you sure you want to delete this event?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmActionBtn">
+                    <i class="fas fa-check me-1"></i> Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="successToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto"><i class="fas fa-check-circle me-2"></i>Success</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body bg-light">
+            <span id="toastMessage">Event created successfully!</span>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="mt-5">
+    <div class="container">
+        <p>&copy; 2023 Volunteer Connect. Designed by Harshil Rao & Kartik Pandit.</p>
+        <p>
+            <a href="privacy.html"><i class="fas fa-shield-alt me-1"></i>Privacy Policy</a> |
+            <a href="terms.html"><i class="fas fa-file-contract me-1"></i>Terms of Service</a>
+        </p>
+    </div>
+</footer>
+
+<script src="../dist/eventsPlanning.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Navbar login/logout script -->
+<script>
+    // Function to update the navbar based on login status
+    function updateNavbar() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const loginLogoutLink = document.getElementById('loginLogoutLink');
+        const userGreeting = document.getElementById('userGreeting');
+
+        if (loggedInUser) {
+            loginLogoutLink.style.display = 'none';
+            userGreeting.style.display = 'block';
+            document.getElementById('usernameDisplay').textContent = loggedInUser;
+        } else {
+            loginLogoutLink.style.display = 'block';
+            userGreeting.style.display = 'none';
+            // Redirect to login if not logged in (since this is a planning page)
+            window.location.href = 'login.html?redirect=eventsPlanning.html';
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('loggedInUser');
+        updateNavbar();
+        window.location.href = 'login.html';
+    }
+
+    // Initialize navbar on load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateNavbar();
+
+        // Set minimum date to today for event date picker
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('eventDate').min = today;
+        document.getElementById('editEventDate').min = today;
+
+        // Add animation to elements
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = 1;
+            });
+        }, 100);
+    });
+
+    // Function to show toast message
+    function showToast(message) {
+        const toast = new bootstrap.Toast(document.getElementById('successToast'));
+        document.getElementById('toastMessage').textContent = message;
+        toast.show();
+    }
+</script>
+</body>
+</html>

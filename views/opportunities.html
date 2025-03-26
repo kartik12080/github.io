@@ -1,0 +1,453 @@
+<!--
+Name: Harshil Rao & Kartik Pandit
+Group: 13
+Date Created: 2025-01-15
+Date Modified: 2025-01-25
+Description: This is Assignment-1
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="../content/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', 'Poppins', 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9ff; /* Light background */
+            color: #007bff; /* Adjusted to match the scheme */
+        }
+
+        /* Navbar styling */
+        nav.navbar {
+            background-color: rgba(255, 193, 7, 0.62); /* Yellow-ish navbar */
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: rgba(43, 136, 198, 0.78) !important;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0 10px;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover {
+            color: rgba(8, 0, 255, 0.7) !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            transition: 0.3s ease-in-out;
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            background-color: #e8f5e9; /* Light green background */
+            color: blue;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            color: #ffc107;
+        }
+
+        .hero-section p {
+            font-size: 1.4rem;
+            margin: 15px 0 30px;
+            font-family: 'Roboto', sans-serif;
+            color: rgba(43, 136, 198, 0.78);
+        }
+
+        .hero-section .btn {
+            background-color: #ffc107; /* Yellow button */
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section .btn:hover {
+            background-color: #ffca28; /* Slightly lighter yellow */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #007bff; /* Blue footer */
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        footer a {
+            color: #ffc107;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ffca28;
+            text-decoration: underline;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Dropdown styling */
+        .dropdown-menu {
+            background-color: #007bff; /* Blue dropdown */
+            border-radius: 10px;
+        }
+
+        .dropdown-item {
+            color: rgba(255, 152, 0, 0.7) !important;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 193, 7, 0.62);
+            color: #ffc107 !important;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Add hover effects for links and buttons */
+        .btn {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            z-index: 1;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+
+        /* Layout adjustments */
+        .hero-section, footer {
+            padding: 80px 40px;
+        }
+
+
+
+
+        /* Buttons alignment */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Event item hover effect */
+        .event-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .event-item:hover {
+            background-color: #ffca28;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .event-item.selected {
+            background-color: #ffeb3b;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .event-item.selected h3,
+        .event-item.selected p {
+            color: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="opportunities.html">Volunteer Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="news.html">News</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Map Container -->
+<div class="container mt-4">
+    <h2 class="text-center">Find Volunteer Opportunities Near You</h2>
+    <div id="map" style="height: 400px; width: 100%; border-radius: 12px; background-color: #f0f0f0;"></div>
+</div>
+
+<!-- Include Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvHpxpAfE5XHAelkSB_zb9js-yj6sXq00&callback=initMap" async defer></script>
+
+
+<div class="container mt-4">
+    <h1 class="text-center">Upcoming Events</h1>
+    <div id="opportunitiesContainer" class="row mt-4">
+        <!-- Opportunities will be populated here by JavaScript -->
+    </div>
+</div>
+
+
+<!-- Volunteer Opportunities Section -->
+<div class="container mt-4">
+    <h2 class="text-center">Volunteer Opportunities</h2>
+    <div id="opportunitiesContainer" class="row"></div>
+</div>
+
+<!-- Modal for Sign Up -->
+<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Sign Up for the Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="signUpForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Preferred Role</label>
+                        <select class="form-select" id="role" required>
+                            <option value="" selected disabled>Select an Event</option>
+                            <option value="Volunteer">Volunteer</option>
+                            <option value="Participant">Participant</option>
+                            <option value="Sponsor">Sponsor</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <div id="confirmationMessage" class="alert alert-success mt-3 d-none"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center mt-4">
+    <p>&copy; Designed by Harshil Rao & Kartik Pandit</p>
+</footer>
+
+
+<script>
+    // Initialize the map
+    function initMap() {
+        // Center the map on Oshawa, Ontario
+        const center = { lat: 43.8650, lng: -78.8500 }; // Centered around Oshawa
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 11, // Adjust the zoom level to fit all markers
+            center: center,
+        });
+
+        // Array of locations with real coordinates
+        const locations = [
+            { lat: 43.8570, lng: -78.8331, title: "Lakeview Park", address: "55 Lakeview Park Ave, Oshawa, Ontario, Canada" },
+            { lat: 43.8726, lng: -78.8679, title: "Downtown Community Centre", address: "1455 Cedar St, Oshawa, ON L1J 0A8" },
+            { lat: 43.8605, lng: -78.8101, title: "Sunny Beach Park (Sunnyside Park)", address: "Sunnyside Park, Oshawa, ON L1H 2M6" },
+            { lat: 43.8652, lng: -78.8114, title: "Durham Wildlife Reserve (Oshawa Second Marsh)", address: "555 Colonel Sam Dr, Oshawa, ON L1H 7Y2" },
+            { lat: 43.6846, lng: -79.4380, title: "Oakwood Village Library", address: "341 Oakwood Ave, Toronto, ON M6E 2W1" },
+            { lat: 43.9330, lng: -78.8644, title: "Onshore Street Park", address: "1139 Mary St N, Oshawa, ON L1G 5G9" },
+        ];
+
+        // Add markers for each location
+        locations.forEach((location) => {
+            const marker = new google.maps.Marker({
+                position: { lat: location.lat, lng: location.lng },
+                map: map,
+                title: location.title,
+            });
+
+            // Add an info window to display the address
+            const infowindow = new google.maps.InfoWindow({
+                content: `<strong>${location.title}</strong><br>${location.address}`,
+            });
+
+            // Show the info window when the marker is clicked
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        });
+    }
+
+    // Call the initMap function when the Google Maps API is loaded
+    google.maps.event.addDomListener(window, "load", initMap);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const opportunities = [
+        {
+            title: "Food Drives",
+            description: "Donate food to those in need and help our community.",
+            date: "2025-03-15",
+            time: "10:00 AM - 2:00 PM",
+            location: "Lakeview Park",
+            image: "../content/images/food.jpg"
+        },
+
+        {
+            title: "Mental Health Awareness Campaigns",
+            description: "Join us in raising awareness for mental health support.",
+            date: "2025-05-01",
+            time: "1:00 PM - 4:00 PM",
+            location: "Downtown Community Center",
+            image: "../content/images/mental.jpg"
+        },
+        {
+            title: "Beach or Park Cleanups",
+            description: "Help clean up the beach and make the community a cleaner place.",
+            date: "2025-06-20",
+            time: "8:00 AM - 12:00 PM",
+            location: "Sunny Beach Park",
+            image: "../content/images/beach.jpg"
+        },
+        {
+            title: "Wildlife Conservation",
+            description: "Volunteer to protect endangered wildlife in our region.",
+            date: "2025-07-10",
+            time: "7:00 AM - 3:00 PM",
+            location: "Durham Wildlife Reserve",
+            image: "../content/images/wildlife.png"
+        },
+        {
+            title: "Book Donation Drives",
+            description: "Contribute books to promote reading and education for all.",
+            date: "2025-08-15",
+            time: "9:00 AM - 1:00 PM",
+            location: "Oakwood Library",
+            image: "../content/images/book.jpg"
+        },
+        {
+            title: "Recycling Drives",
+            description: "Help recycling through community activities.",
+            date: "2025-09-05",
+            time: "10:00 AM - 4:00 PM",
+            location: "Onshore Street Park",
+            image: "../content/images/recycling.jpg"
+        }
+    ];
+
+    const opportunitiesContainer = document.getElementById("opportunitiesContainer");
+
+    opportunities.forEach((opportunity) => {
+        const card = document.createElement("div");
+        card.classList.add("col-md-4");
+
+        card.innerHTML = `
+    <div class="card">
+      <img src="${opportunity.image}" class="card-img-top" alt="${opportunity.title}">
+      <div class="card-body">
+        <h5 class="card-title">${opportunity.title}</h5>
+        <p class="card-text">${opportunity.description}</p>
+        <p><strong>Date:</strong> ${opportunity.date}</p>
+        <p><strong>Time:</strong> ${opportunity.time}</p>
+        <p><strong>Location:</strong> ${opportunity.location}</p>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signUpModal" onclick="populateModal('${opportunity.title}')">Sign Up</button>
+      </div>
+    </div>
+  `;
+        opportunitiesContainer.appendChild(card);
+    });
+
+    function populateModal(eventTitle) {
+        document.getElementById("signUpModalLabel").innerText = `Sign Up for ${eventTitle}`;
+    }
+
+    // Handle form submission and show confirmation message
+    const signUpForm = document.getElementById('signUpForm');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+
+    signUpForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Grab values from the form
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const role = document.getElementById('role').value;
+
+        // Show confirmation message
+        confirmationMessage.classList.remove('d-none');
+        confirmationMessage.innerHTML = `Thank you ${name} for signing up for the event. Details will be sent to ${email} soon.`;
+
+        // Clear the form
+        signUpForm.reset();
+    });
+</script>

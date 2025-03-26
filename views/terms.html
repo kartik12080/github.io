@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Terms and Conditions | Volunteer Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --info: #4895ef;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: white !important;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin: 0 10px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: white;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            height: 2px;
+            width: 24px;
+            background-color: white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon:before,
+        .navbar-toggler-icon:after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 24px;
+            background-color: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon:before {
+            top: -8px;
+        }
+
+        .navbar-toggler-icon:after {
+            top: 8px;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .terms-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .terms-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .terms-content {
+            background: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .terms-section {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .terms-section:hover {
+            border-left: 3px solid var(--accent);
+        }
+
+        .terms-section h2 {
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .terms-section h2 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .terms-section p {
+            font-size: 1rem;
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+
+        .terms-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .terms-section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .terms-section li:before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-column h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .terms-header h1 {
+                font-size: 2rem;
+            }
+
+            .terms-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .terms-section {
+                padding-left: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .terms-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .terms-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .terms-content {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+            <i class="fas fa-hands-helping"></i>Volunteer Connect
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Opportunities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="terms-header">
+        <h1>Volunteer Terms and Conditions</h1>
+        <p>Please read these terms carefully before using our platform to volunteer</p>
+    </div>
+
+    <div class="terms-content">
+        <div class="terms-section">
+            <h2><i class="fas fa-user-check"></i>1. Eligibility</h2>
+            <p>You must be 18 years or older to use the Website and to participate in volunteer activities. Some opportunities may have additional requirements which will be specified in the opportunity details.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-laptop"></i>2. Use of Website</h2>
+            <p>You agree to use the Website responsibly and for lawful purposes only. Prohibited activities include:</p>
+            <ul>
+                <li>Posting false or misleading information</li>
+                <li>Harassing other users</li>
+                <li>Attempting to gain unauthorized access to our systems</li>
+                <li>Any activity that violates applicable laws</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-user-plus"></i>3. Registration</h2>
+            <p>You may have to create an account to participate in volunteer activities. You are responsible for:</p>
+            <ul>
+                <li>Keeping your account information safe</li>
+                <li>All activities that occur under your account</li>
+                <li>Providing accurate and complete information</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-search"></i>4. Volunteer Opportunities</h2>
+            <p>We connect volunteers with opportunities, but we do not organize, oversee, or warrant the opportunities themselves. You are responsible for:</p>
+            <ul>
+                <li>Evaluating the opportunities before participating</li>
+                <li>Understanding the requirements and commitments</li>
+                <li>Following all rules and guidelines of the hosting organization</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-users"></i>5. Code of Conduct</h2>
+            <p>You will act professionally and respectfully in your volunteering and will comply with all applicable laws. This includes:</p>
+            <ul>
+                <li>Treating all individuals with dignity and respect</li>
+                <li>Maintaining appropriate boundaries</li>
+                <li>Following the host organization's policies</li>
+                <li>Reporting any unsafe conditions immediately</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-comment"></i>6. User Content</h2>
+            <p>Material you post to the Website (such as feedback or applications) may be used by Volunteer Connect in connection with the Website. By posting content, you grant us a non-exclusive, royalty-free license to use, reproduce, and display such content.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-lock"></i>7. Privacy</h2>
+            <p>We respect your privacy. To find out more about how we process your data, please see our <a href="#" style="color: var(--accent);">Privacy Policy</a>. We implement appropriate security measures to protect your personal information.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-link"></i>8. Links to Other Websites</h2>
+            <p>The Website may contain links to other sites. We do not bear any responsibility for their content and services. We recommend reviewing the terms and privacy policies of any third-party sites you visit.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-exclamation-triangle"></i>9. Disclaimer/Limitation of Liability</h2>
+            <p>We shall not be held liable for any damage resulting from the use of the Website or Volunteer activities. This includes, but is not limited to:</p>
+            <ul>
+                <li>Direct, indirect, incidental, or consequential damages</li>
+                <li>Damages resulting from lost data or business interruption</li>
+                <li>Any errors or omissions in the content</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-ban"></i>10. Termination</h2>
+            <p>We may suspend or cancel your access to the Website if you breach these terms. You may also terminate your account at any time by contacting us.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-shield-alt"></i>11. Indemnification</h2>
+            <p>You agree to indemnify Volunteer Connect against any claims or losses arising from actions on the Website by you. This includes legal fees and expenses related to such claims.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-balance-scale"></i>12. Governing Law</h2>
+            <p>These terms shall be governed by and interpreted in accordance with the laws of the jurisdiction where Volunteer Connect is registered. Any disputes will be resolved in the courts of that jurisdiction.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2><i class="fas fa-sync-alt"></i>13. Changes</h2>
+            <p>We might change these terms. Please check back for changes. Your continued use of the site after changes constitutes acceptance of the modified terms.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Volunteer Connect</h3>
+            <p>Connecting passionate volunteers with meaningful opportunities to make a difference in communities worldwide.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Volunteer Opportunities</a></li>
+                <li><a href="#">Success Stories</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Volunteer Handbook</a></li>
+                <li><a href="#">Safety Guidelines</a></li>
+                <li><a href="#">Community Forum</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#">Terms of Service</a></
