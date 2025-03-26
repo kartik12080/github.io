@@ -27,7 +27,7 @@ interface StatisticsData {
 
 async function loadStatistics(): Promise<StatisticsData> {
     try {
-        const response = await fetch('/github.io/Data/statistics.json');
+        const response = await fetch('Data/statistics.json');
         if (!response.ok) throw new Error('Failed to load statistics');
         return await response.json();
     } catch (error) {
